@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "ESNext",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./dist",
+      "rootDir": "./",
+      "moduleResolution": "node"
+    },
+    "include": ["*.ts", "routes/*.ts", "services/*.ts"],
+    "exclude": ["node_modules"]
+}
