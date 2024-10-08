@@ -1,5 +1,7 @@
 import ShortUniqueId from 'short-unique-id';
-import { v4 as uuidv4 } from 'uuid';
+
+const uid = new ShortUniqueId({ length: 10 });
+
 interface Todo {
   id: string;
   title: string;
@@ -30,7 +32,7 @@ export const todoService = {
     }
 
     const newTodo: Todo = {
-      id: uuidv4(),
+      id: uid.generate(),
       title: title.trim(),
       completed: false,
     };
@@ -45,18 +47,14 @@ export const todoService = {
     }
 
     const { title, completed } = updates;
-    if (
-      title !== undefined &&
-      (typeof title !== 'string' || title.trim() === '')
-    ) {
+    if (title !== undefined && (typeof title !== 'string' || title.trim() === '')) {
       throw new Error('Title must be a non-empty string');
     }
 
     const updatedTodo = { ...todos[todoIndex] };
     if (title !== undefined) {
       const existingTodo = todos.find(
-        (t) =>
-          t.id !== id && t.title.toLowerCase() === title.trim().toLowerCase()
+        (t) => t.id !== id && t.title.toLowerCase() === title.trim().toLowerCase()
       );
       if (existingTodo) {
         throw new Error('A todo with this title already exists');
