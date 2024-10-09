@@ -1,7 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const uid = new ShortUniqueId({ length: 10 });
-
 interface Todo {
   id: string;
   title: string;

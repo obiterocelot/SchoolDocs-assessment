@@ -2,13 +2,6 @@
 
 This is the frontend for the Schooldocs Todo application, designed as part of the full-stack developer assessment. The application is built using React and a UI framework of your choice to showcase your design skills.
 
-## Features
-
-- User-friendly interface for managing todos.
-- Ability to create, read, update, and delete todos.
-- Responsive design that adapts to different screen sizes.
-- Schooldocs-themed UI with a green color scheme.
-
 ## Getting Started
 
 To get started with the frontend application, follow these steps:
@@ -16,18 +9,21 @@ To get started with the frontend application, follow these steps:
 1. **Ensure you have clone the repository** on your machine.
 
 2. **Navigate to the codebase**:
+
    ```bash
    cd frontEnd
    ```
 
 3. **Install the dependencies**:
    Run the following command to install the required packages:
+
    ```bash
    npm install
    ```
 
 4. **Start the development server**:
    Use the following command to start the application:
+
    ```bash
    npm start
    ```
@@ -49,8 +45,6 @@ In the project directory, you can run:
 - Reused code
 
 ## Connecting to the Backend
-
-This frontend is configured to proxy requests to the backend server running on `http://localhost:7777` or any customer port. Ensure that the backend server is running before starting the frontend application.
-
+This frontend is configured to proxy requests to the backend server running on [http://localhost:7777](http://localhost:7777) or any custom port used in the backend. Ensure that the backend server is running before starting the frontend application.
 
 Good luck with your assessment, and we look forward to reviewing your work!

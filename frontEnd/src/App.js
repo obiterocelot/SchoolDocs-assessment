@@ -1,81 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:5000/api/todos';
+import React from 'react';
+import './App.css';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
-  const fetchTodos = async () => {
-    try {
-      const response = await axios.get(API_BASE_URL);
-      setTodos(response.data);
-    } catch (error) {
-      console.error('Error fetching todos:', error);
-    }
-  };
-
-  const addTodo = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(API_BASE_URL, { title: newTodo });
-      setNewTodo('');
-      fetchTodos();
-    } catch (error) {
-      console.error('Error adding todo:', error);
-    }
-  };
-
-  const toggleTodo = async (id, completed) => {
-    try {
-      await axios.put(`${API_BASE_URL}/${id}`, { completed: !completed });
-      fetchTodos();
-    } catch (error) {
-      console.error('Error toggling todo:', error);
-    }
-  };
-
-  const deleteTodo = async (id) => {
-    try {
-      await axios.delete(`${API_BASE_URL}/${id}`);
-      fetchTodos();
-    } catch (error) {
-      console.error('Error deleting todo:', error);
-    }
-  };
-
   return (
-    <div className="App">
-      <h1>Todo App</h1>
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add a new todo"
-        />
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => toggleTodo(todo.id, todo.completed)}
-            />
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-              {todo.title}
-            </span>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+    <div className='App'>
+      <header className='App-header'>
+        <h1>Welcome to SchoolDocs</h1>
+      </header>
+      <main>
+        <h2>Developer Assessment</h2>
+        <p>Thank you for your interest in joining our team at SchoolDocs!</p>
+        <p>
+          This assessment is designed to evaluate your skills in software
+          development.
+        </p>
+        <div className='instructions'>
+          <h3>Instructions:</h3>
+          <ol>
+            <li>
+              You will receive specific tasks based on the role you're applying
+              for. These tasks may involve frontend, backend, or full-stack
+              development.
+            </li>
+            <li>
+              Focus on creating a clean, maintainable, and well-structured
+              codebase.
+            </li>
+            <li>
+              Ensure proper error handling and user feedback in your
+              implementation.
+            </li>
+            <li>
+              You can choose to write your own styles or use any UI framework to showcase your design skills.
+            </li>
+            <li>
+              You are also welcome to use TypeScript to demonstrate your proficiency in type safety and code maintainability.
+            </li>
+            <li>
+              Be prepared to discuss your implementation choices and potential
+              improvements.
+            </li>
+          </ol>
+        </div>
+        <p>Good luck, and we look forward to reviewing your work!</p>
+      </main>
     </div>
   );
 }

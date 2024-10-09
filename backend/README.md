@@ -28,14 +28,15 @@ This is the backend for a simple Todo application built with Node.js, Express, a
 
 ## Installation
 
-1. **Clone the repository:**
 
+1. **Ensure you have clone the repository** on your machine.
+
+2. **Navigate to the codebase**:
    ```bash
-   git clone git@github.com:SchoolDocsLTD/full-stack-developer-assessment.git
    cd backend
    ```
 
-2. **Install dependencies:**
+3. **Install dependencies:**
    Make sure you have Node.js installed. Then run:
    ```bash
    npm install
