@@ -1,5 +1,5 @@
 import express from 'express';
-import { todoService } from '../services/todoService';
+import { todoService } from '../services/todoService.js';  // Note the .js extension
 
 const router = express.Router();
 
