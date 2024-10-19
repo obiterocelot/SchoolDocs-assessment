@@ -1,9 +1,13 @@
 
 import { Sequelize, Model, DataTypes } from 'sequelize'
 
+if (!process.env.DB_PATH) {
+    throw new Error("DB_PATH is missing");
+}
+
 export const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: './database.sqlite'
+    storage: process.env.DB_PATH
 });
 
 export class School extends Model {

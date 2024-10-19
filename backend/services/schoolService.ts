@@ -11,13 +11,14 @@ export const schoolService = {
     return await School.findAll();
   },
 
-  find: async (id: number): Promise<SchoolAttributes | undefined> => {
+  find: async (id: string): Promise<SchoolAttributes | undefined> => {
     return await School.findByPk(id);
   },
 
-  create: async (data: { name: string, decile: number }): Promise<SchoolAttributes> => {
-    const name: string = data['name']
-    const decile: number = data['decile']
+  create: async (payload: { name: string, decile: number }): Promise<SchoolAttributes> => {
+    console.log(payload)
+    const name: string = payload.name
+    const decile: number = payload.decile
     if (!name || typeof name !== 'string' || name.trim() === '') {
       throw new Error('School Name is required and must be a non-empty string');
     }
@@ -35,7 +36,7 @@ export const schoolService = {
     return newSchool
   },
 
-  update: async (id: number, payload: { name: string, decile: number }): Promise<SchoolAttributes> => {
+  update: async (id: string, payload: { name: string, decile: number }): Promise<SchoolAttributes> => {
     if (!payload.name || typeof payload.name !== 'string' || payload.name.trim() === '') {
       throw new Error('Name must be a non-empty string');
     }

@@ -28,14 +28,14 @@ describe('School Service', () => {
 
     describe('schoolServce.find', () => {
         it('should return undefined for a non-existing school', async () => {
-            const result = await schoolService.find(999);
+            const result = await schoolService.find('999');
             expect(result).toBeNull();
         });
 
         it('should return the school for an existing id', async () => {
             await schoolService.create({ name: 'School A', decile: 1 });
 
-            const result = await schoolService.find(1);
+            const result = await schoolService.find('1');
             expect(result).toEqual(expect.objectContaining({ id: 1, name: 'School A', decile: 1 }),);
         });
     });
@@ -75,7 +75,7 @@ describe('School Service', () => {
             ]);
         });
         it('should update a school successfully', async () => {
-            const updatedSchool = await schoolService.update(1, { name: 'Updated School A', decile: 6 });
+            const updatedSchool = await schoolService.update('1', { name: 'Updated School A', decile: 6 });
             expect(updatedSchool).toEqual(
                 expect.objectContaining({
                     id: 1,
@@ -86,20 +86,20 @@ describe('School Service', () => {
         });
 
         it('should throw an error if the school is not found', async () => {
-            await expect(schoolService.update(999, { name: 'Nonexistent School', decile: 7 })).rejects.toThrow('School not found');
+            await expect(schoolService.update('999', { name: 'Nonexistent School', decile: 7 })).rejects.toThrow('School not found');
         });
 
         it('should throw an error if the name is not a non-empty string', async () => {
-            await expect(schoolService.update(1, { name: '', decile: 6 })).rejects.toThrow('Name must be a non-empty string');
-            await expect(schoolService.update(1, { name: 123 as any, decile: 6 })).rejects.toThrow('Name must be a non-empty string');
+            await expect(schoolService.update('1', { name: '', decile: 6 })).rejects.toThrow('Name must be a non-empty string');
+            await expect(schoolService.update('1', { name: 123 as any, decile: 6 })).rejects.toThrow('Name must be a non-empty string');
         });
 
         it('should throw an error if name is not provided', async () => {
-            await expect(schoolService.update(1, { name: undefined as any, decile: 6 })).rejects.toThrow('Name must be a non-empty string');
+            await expect(schoolService.update('1', { name: undefined as any, decile: 6 })).rejects.toThrow('Name must be a non-empty string');
         });
 
         it('should update the decile if provided', async () => {
-            const updatedSchool = await schoolService.update(1, { name: 'School A', decile: 9 });
+            const updatedSchool = await schoolService.update('1', { name: 'School A', decile: 9 });
             expect(updatedSchool).toEqual(
                 expect.objectContaining({
                     id: 1,

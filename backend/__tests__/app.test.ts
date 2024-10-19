@@ -1,12 +1,9 @@
-import request from "supertest";
+import request from 'supertest';
+import app from '../app';
 
-import app from "../server";
-
-describe('GET /', () => {
-    it('should respond with Hello World!', async () => {
-        const response = await request(app).get('/');
-
-        expect(response.status).toBe(200);
-        expect(response.text).toBe('Hello World!');
+describe('Server', () => {
+    it('should return 404 for undefined routes', async () => {
+        const response = await request(app).get('/undefined-route');
+        expect(response.status).toBe(404);
     });
 });
