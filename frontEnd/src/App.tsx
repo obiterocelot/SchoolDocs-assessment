@@ -6,8 +6,11 @@ import './App.css';
 function App() {
     return (
         <>
-            <SchoolList />
-            <SchoolCreate />
+            <div className="app-container">
+                <h1>Your Schools</h1>
+                <SchoolList />
+                <SchoolCreate />
+            </div>
         </>
     )
 }

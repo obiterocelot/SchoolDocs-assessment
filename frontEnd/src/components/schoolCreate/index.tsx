@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
 
+import './createForm.css';
+
 type School = {
     id: number,
     name: string,
@@ -48,27 +50,27 @@ const SchoolCreate = () => {
 
     return (
         <div>
-            <h2>Create a New School</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className="create-school-form">
+                <h1>Create a New School</h1>
+                <div className="form-group">
                     <label htmlFor="schoolName">School Name:</label>
                     <input
                         type="text"
                         id="schoolName"
                         value={name}
-                        onChange={(e) => setName(e.target.value)} // Update name state
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label htmlFor="schoolDecile">Decile:</label>
                     <input
                         type="number"
                         id="schoolDecile"
                         value={decile}
-                        onChange={(e) => setDecile(e.target.value === '' ? '' : Number(e.target.value))} // Update decile state
+                        onChange={(e) => setDecile(e.target.value === '' ? '' : Number(e.target.value))}
                     />
                 </div>
-                <button type="submit">Create School</button>
+                <button className="createButton" type="submit">Create School</button>
             </form>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}

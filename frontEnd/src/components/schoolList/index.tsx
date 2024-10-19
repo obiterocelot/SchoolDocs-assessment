@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { Column, useTable } from 'react-table';
 import UpdateSchool from '../schoolUpdate';
 import DeleteSchool from '../schoolDelete';
+import './schoolList.css';
 
 type School = {
     id: number,
@@ -49,8 +50,8 @@ const SchoolList = () => {
             accessor: 'actions',
             Cell: ({ row }: { row: { original: School } }) => (
                 <>
-                    <button onClick={() => setEditingSchoolId(row.original.id)}>Edit</button>
-                    <button onClick={() => setDeletingSchoolId(row.original.id)}>Delete</button>
+                    <button className="action-button" onClick={() => setEditingSchoolId(row.original.id)}>Edit</button>
+                    <button className="action-button" onClick={() => setDeletingSchoolId(row.original.id)}>Delete</button>
                 </>
             ),
         },
@@ -82,7 +83,19 @@ const SchoolList = () => {
 
     return (
         <>
-            <table {...getTableProps()} className="school-table">
+            <table {...getTableProps()} className="styled-table">
+                <thead className="responsive-table">
+                    {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map(column => (
+
+                                column.id !== 'actions' && (
+                                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                )
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
                 <tbody {...getTableBodyProps()}>
                     {rows.map(row => {
                         prepareRow(row);

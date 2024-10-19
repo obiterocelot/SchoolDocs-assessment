@@ -5,7 +5,8 @@
 }
 
 .App-header {
-  background-color: #4caf50; /* Schooldocs green */
+  background-color: #4caf50;
+  /* Schooldocs green */
   padding: 20px;
   color: white;
 }
@@ -18,28 +19,20 @@ main {
 
 h1 {
   margin: 0;
+  color: #4caf50;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 h2 {
   color: #4caf50;
 }
 
-.instructions {
-  text-align: left;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-}
-
-.instructions h3 {
-  color: #4caf50;
-}
-
-ol {
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 10px;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  font-size: 2.5rem;
 }
