@@ -1,6 +1,6 @@
 import express from 'express';
 import schoolRouter from './routes/school';
-import sequelize from './db'
+import { sequelize } from './db'
 
 // Sync models with database
 sequelize.sync().then(() => console.log('db is ready!'));
