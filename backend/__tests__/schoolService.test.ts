@@ -40,7 +40,7 @@ describe('School Service', () => {
         });
     });
 
-    describe('create', () => {
+    describe('schoolService.create', () => {
         it('should create a new school and return it', async () => {
             const newSchool = await schoolService.create({ name: 'School A', decile: 1 });
             expect(newSchool).toEqual(expect.objectContaining({ name: 'School A', decile: 1 }));
@@ -65,6 +65,76 @@ describe('School Service', () => {
             await expect(schoolService.create({ name: 'School A', decile: 5 })).rejects.toThrow(
                 'A school with this name already exists'
             );
+        });
+    });
+    describe('schoolService.update', () => {
+        beforeEach(async () => {
+            await School.bulkCreate([
+                { name: 'School A', decile: 5 },
+                { name: 'School B', decile: 8 },
+            ]);
+        });
+        it('should update a school successfully', async () => {
+            const updatedSchool = await schoolService.update(1, { name: 'Updated School A', decile: 6 });
+            expect(updatedSchool).toEqual(
+                expect.objectContaining({
+                    id: 1,
+                    name: 'Updated School A',
+                    decile: 6,
+                })
+            );
+        });
+
+        it('should throw an error if the school is not found', async () => {
+            await expect(schoolService.update(999, { name: 'Nonexistent School', decile: 7 })).rejects.toThrow('School not found');
+        });
+
+        it('should throw an error if the name is not a non-empty string', async () => {
+            await expect(schoolService.update(1, { name: '', decile: 6 })).rejects.toThrow('Name must be a non-empty string');
+            await expect(schoolService.update(1, { name: 123 as any, decile: 6 })).rejects.toThrow('Name must be a non-empty string');
+        });
+
+        it('should throw an error if name is not provided', async () => {
+            await expect(schoolService.update(1, { name: undefined as any, decile: 6 })).rejects.toThrow('Name must be a non-empty string');
+        });
+
+        it('should update the decile if provided', async () => {
+            const updatedSchool = await schoolService.update(1, { name: 'School A', decile: 9 });
+            expect(updatedSchool).toEqual(
+                expect.objectContaining({
+                    id: 1,
+                    name: 'School A',
+                    decile: 9,
+                })
+            );
+        });
+    });
+    describe('schoolService.remove', () => {
+        beforeEach(async () => {
+            await School.bulkCreate([
+                { name: 'School A', decile: 5 },
+                { name: 'School B', decile: 8 },
+            ]);
+        });
+        it('should remove a school successfully', async () => {
+            await schoolService.remove('1');
+
+            const school = await School.findByPk('1');
+            expect(school).toBeNull();
+        });
+
+        it('should throw an error if the school does not exist', async () => {
+            await expect(schoolService.remove('999')).rejects.toThrow('School not found');
+        });
+
+        it('should remove the correct school', async () => {
+            await schoolService.remove('1');
+
+            const schoolA = await School.findByPk('1');
+            const schoolB = await School.findByPk('2');
+
+            expect(schoolA).toBeNull();
+            expect(schoolB).not.toBeNull();
         });
     });
 });
