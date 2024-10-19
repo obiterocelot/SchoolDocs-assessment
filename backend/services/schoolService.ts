@@ -1,14 +1,25 @@
 import { School } from '../db'
+import { format } from 'date-fns';
 
 interface SchoolAttributes {
   id?: number;
   name: string;
   decile: number;
+  createdAt?: string
+  updatedAt?: string
 }
 
 export const schoolService = {
   findAll: async (): Promise<SchoolAttributes[]> => {
-    return await School.findAll();
+    const schools = await School.findAll();
+
+    return schools.map(school => ({
+      id: school.id,
+      name: school.name,
+      decile: school.decile,
+      createdAt: school.createdAt ? format(new Date(school.createdAt), 'dd/MM/yy HH:mm') : undefined,
+      updatedAt: school.updatedAt ? format(new Date(school.updatedAt), 'dd/MM/yy HH:mm') : undefined,
+    }));
   },
 
   find: async (id: string): Promise<SchoolAttributes | undefined> => {

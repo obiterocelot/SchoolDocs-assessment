@@ -14,6 +14,8 @@ export class School extends Model {
     public id: number;
     public name: string;
     public decile!: number;
+    public createdAt!: string;
+    public updatedAt!: string;
 }
 School.init({
     id: {
